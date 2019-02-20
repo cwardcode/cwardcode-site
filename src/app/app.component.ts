@@ -27,6 +27,7 @@ export class AppComponent {
 
         case 'login': {
           // TODO use actual library
+          response = 'Redirecting to login page..';
           window.location.replace('https://auth.cwardcode.com/login?redirect_uri=https%3A%2F%2Fcwardcode.com&response_type=token&client_id=3e4nmhs5bkjkpc734silkdhd3f&state=TQz4g2Lm1yklfmUbtZlCeN0ptdIQOzL5&scope=openid%20profile%20email');
           break;
         }
