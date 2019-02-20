@@ -18,7 +18,7 @@ export class AppComponent {
   constructor(private terminalService: TerminalService) {
     this.terminalService.commandHandler.subscribe(cmd => {
       let response;
-      switch(cmd) {
+      switch(cmd.toLowerCase()) {
 
         case 'whoami': {          
           response = 'user@cwardcode.com';
@@ -26,7 +26,8 @@ export class AppComponent {
         }
 
         case 'login': {
-          response = 'Coming Soon...';
+          // TODO use actual library
+          window.location.replace('https://auth.cwardcode.com/login?redirect_uri=https%3A%2F%2Fcwardcode.com&response_type=token&client_id=3e4nmhs5bkjkpc734silkdhd3f&state=TQz4g2Lm1yklfmUbtZlCeN0ptdIQOzL5&scope=openid%20profile%20email');
           break;
         }
 
