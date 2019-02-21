@@ -1,4 +1,5 @@
-# Cwardcode
+# CwardCode Website
+[![Build Status](https://cloud.drone.io/api/badges/cwardcode/cwardcode-site/status.svg)](https://cloud.drone.io/cwardcode/cwardcode-site)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.0.
 
