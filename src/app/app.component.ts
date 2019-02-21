@@ -33,6 +33,18 @@ export class AppComponent {
           break;
         }
 
+        case 'exit': {
+          response = 'Goodbye!';
+          window.location.replace('https://google.com');
+          break;
+        }
+
+        case 'view-source': {
+          response = 'Exiting the site and navigating to github';
+          window.location.replace('https://github.com.com/cwardcode/cwardcode-site');
+          break;
+        }
+
         case 'adduser': {
           response = 'Coming soon...';
           break;
@@ -52,7 +64,7 @@ export class AppComponent {
         }
 
         case 'help': {
-          response = 'Supported commands are: whoami, login, adduser, clear';
+          response = 'supported commands are: whoami, login, adduser, clear, view-source, exit';
           break;
         }
         default: {
