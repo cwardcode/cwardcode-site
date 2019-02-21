@@ -27,6 +27,6 @@ steps:
       secret_key:
         from_secret: aws-key-secret
       region: us-east-1
-      source: dist/
+      source: dist/cwardcode
       target: /
       delete: true
