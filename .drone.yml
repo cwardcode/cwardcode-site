@@ -18,3 +18,16 @@ steps:
     image: markhobson/node-chrome
     commands:
       - npm run build
+  - name: deploy
+    image: plugins/s3-sync:1
+    settings:
+      bucket: cwardcode-site
+      access_key:
+        from_secret: aws-key
+      secret_key:
+        from_secret: aws-key-secret
+      region: us-east-1
+      bucket: cwardcode-site.s3-website-us-east-1.amazonaws.com
+      source: dist/
+      target: /
+      delete: true
