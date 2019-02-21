@@ -18,7 +18,7 @@ steps:
     image: node
     commands:
       - CHROME_PATH=$(which google-chrome)
-      - echo Chrome is located at: $CHROME_PATH
+      - echo "Chrome is located at " $CHROME_PATH
       - export CHROME_BIN=$CHROME_PATH
       - npm run test
   - name: build
