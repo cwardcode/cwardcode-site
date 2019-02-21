@@ -30,3 +30,7 @@ steps:
       source: dist/cwardcode
       target: /
       delete: true
+      cloudfront_distribution: EJ4DLK989IHGJ
+    when:
+      branch:
+        - master
