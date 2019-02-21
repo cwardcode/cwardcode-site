@@ -27,7 +27,6 @@ steps:
       secret_key:
         from_secret: aws-key-secret
       region: us-east-1
-      bucket: cwardcode-site.s3-website-us-east-1.amazonaws.com
       source: dist/
       target: /
       delete: true
