@@ -10,7 +10,7 @@ steps:
     image: node
     commands:
       - npm i
-  - name: test
+  - name: test-ci
     image: node
     commands:
       - npm run test
