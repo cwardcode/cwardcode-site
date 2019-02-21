@@ -41,7 +41,7 @@ export class AppComponent {
 
         case 'view-source': {
           response = 'Exiting the site and navigating to github';
-          window.location.replace('https://github.com.com/cwardcode/cwardcode-site');
+          window.location.replace('https://github.com/cwardcode/cwardcode-site');
           break;
         }
 
