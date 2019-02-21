@@ -7,21 +7,14 @@ platform:
   
 steps:
   - name: install
-    image: node
+    image: markhobson/node-chrome
     commands:
       - npm i
-      - curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-      - echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
-      - apt-get -y update
-      - apt-get -y install google-chrome-stable 
-  - name: test-ci
-    image: node
+  - name: test
+    image: markhobson/node-chrome
     commands:
-      - CHROME_PATH=$(which google-chrome)
-      - echo "Chrome is located at " $CHROME_PATH
-      - export CHROME_BIN=$CHROME_PATH
-      - npm run test
+      - npm run test-ci
   - name: build
-    image: node
+    image: markhobson/node-chrome
     commands:
       - npm run build
