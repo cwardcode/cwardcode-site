@@ -2,6 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { TerminalService } from 'primeng/components/terminal/terminalservice';
 import { Subscription } from 'rxjs';
 import { Terminal } from 'primeng/terminal';
+import { AmplifyService } from 'aws-amplify-angular';
+import {DialogModule} from 'primeng/dialog';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,23 +17,65 @@ export class AppComponent {
   subscription: Subscription;
   promptText = 'cwardcode $';
   // tslint:disable-next-line:max-line-length
-  welcomeMessage = 'Welcome to CWardCode. My new site is under construction. Until it is finished, play around and have fun! Type help for more information.';
-  constructor(private terminalService: TerminalService) {
+  welcomeMessage = 'Welcome to CWardCode. Authentication required to continue.';
+  signedIn = false;
+  user = null;
+  userName = '';
+  displaySignIn = false;
+
+  constructor(
+    private terminalService: TerminalService,
+    public amplifyService: AmplifyService
+   ) {
+
+    this.amplifyService = amplifyService;
+
+    if (!this.user) {
+      this.displaySignIn = true;
+    }
+
+    this.amplifyService.authStateChange$
+      .subscribe(authState => {
+        this.signedIn = authState.state === 'signedIn';
+        if (!authState.user) {
+          this.user = null;
+          this.displaySignIn = true;
+        } else {
+          this.user = authState.user;
+          this.userName = this.user.username;
+          this.displaySignIn = false;
+        }
+      });
+
     this.terminalService.commandHandler.subscribe(cmd => {
       let response;
       switch (cmd.toLowerCase()) {
-
         case 'whoami': {
-          response = 'user@cwardcode.com';
+          if (!this.user) {
+            response = 'not signed in';
+          } else {
+            response = this.userName + '@cwardcode.com';
+          }
           break;
         }
 
         case 'login': {
-          // TODO use actual library
-          response = 'Redirecting to login page..';
-          // tslint:disable-next-line:max-line-length
-          window.location.replace('https://auth.cwardcode.com/login?redirect_uri=https%3A%2F%2Fcwardcode.com&response_type=token&client_id=3e4nmhs5bkjkpc734silkdhd3f&state=TQz4g2Lm1yklfmUbtZlCeN0ptdIQOzL5&scope=openid%20profile%20email');
+          if (this.user) {
+            break;
+          } else {
+            this.displaySignIn = true;
+          }
           break;
+        }
+
+        case 'logout': {
+          if (!this.user) {
+            break;
+          } else {
+            this.amplifyService.auth().signOut();
+            response = 'You have been signed out.';
+            break;
+          }
         }
 
         case 'exit': {
@@ -51,15 +96,7 @@ export class AppComponent {
         }
 
         case 'clear': {
-          const commands = this.terminalPrompt.el.nativeElement.children[0];
-          console.log(commands.childNodes);
-        /*  for(let i = 1; commands.childElementCount.length > 1; i++){
-            console.log(commands.children[i]);
-            //console.log(this.terminalPrompt.el.nativeElement.children.length)
-            if(commands.children[i] != null) {
-              commands.removeChild(commands.children[i]);
-            }
-          }*/
+          response = 'Coming soon...';
           break;
         }
 
@@ -67,6 +104,7 @@ export class AppComponent {
           response = 'supported commands are: whoami, login, adduser, clear, view-source, exit';
           break;
         }
+
         default: {
           response = 'Unknown Command: ' + cmd;
           break;

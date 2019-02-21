@@ -1,8 +1,10 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { MockComponent } from 'ng-mocks';
-import { Terminal, TerminalModule } from 'primeng/terminal';
+import { TerminalModule } from 'primeng/terminal';
+import { DialogModule } from 'primeng/dialog';
+import { AmplifyIonicModule, AmplifyAngularModule } from 'aws-amplify-angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -12,7 +14,11 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        TerminalModule
+        TerminalModule,
+        DialogModule,
+        AmplifyIonicModule,
+        AmplifyAngularModule,
+        BrowserAnimationsModule
       ],
       declarations: [
         AppComponent

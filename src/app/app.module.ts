@@ -4,9 +4,10 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-//prime-ng
+import { AmplifyAngularModule, AmplifyService, AmplifyIonicModule } from 'aws-amplify-angular';
 import { TerminalModule } from 'primeng/terminal';
-
+import { DialogModule } from 'primeng/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent
@@ -14,9 +15,13 @@ import { TerminalModule } from 'primeng/terminal';
   imports: [
     TerminalModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AmplifyAngularModule,
+    AmplifyIonicModule,
+    DialogModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [AmplifyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
