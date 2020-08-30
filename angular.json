@@ -31,8 +31,7 @@
               "src/styles.scss",
               "./node_modules/font-awesome/css/font-awesome.min.css"
             ],
-            "scripts": [],
-            "es5BrowserSupport": true
+            "scripts": []
           },
           "configurations": {
             "production": {
