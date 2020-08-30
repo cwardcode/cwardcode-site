@@ -4,7 +4,7 @@ name: default
 platform:
   os: linux
   arch: amd64
-  
+
 steps:
   - name: install
     image: markhobson/node-chrome
@@ -30,7 +30,7 @@ steps:
       source: dist/cwardcode
       target: /
       delete: true
-      cloudfront_distribution: EJ4DLK989IHGJ
+      cloudfront_distribution: E216SKA0KYN9TQ
     when:
       branch:
         - master
